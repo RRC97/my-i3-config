@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# A variável para o caminho da imagem de fundo será passada como argumento.
+I3LOCK=""
+
+# Define um limite de inatividade em milissegundos para considerar o sistema "ocioso"
+# Se o tempo de inatividade do Xorg for menor que esse, consideramos que há atividade.
+INACTIVITY_THRESHOLD_MS=0 # 5 segundos de tolerância. Ajuste se necessário.
+
+# Verifica se o processo i3lock está em execução
+is_i3lock_active() {
+    pgrep i3lock > /dev/null
+}
+
+# Verifica a inatividade do Xorg
+# Retorna true se o tempo de inatividade for menor que o limite (sistema ATIVO)
+is_xorg_active() {
+    IDLE_TIME=$(xprintidle)
+    # Debug: Você pode descomentar a linha abaixo para ver o tempo de inatividade no log
+    # echo "Idle time: $IDLE_TIME ms" >> /tmp/xautolock_debug.log
+    [[ "$IDLE_TIME" -lt "$INACTIVITY_THRESHOLD_MS" ]]
+}
+
+# --- Lógica Principal ---
+
+# Processa os argumentos.
+ACTION="$1"
+shift
+
+I3LOCK="$1 $2" # Altere para "-c $2" se o seu i3lock usa -c para imagens
+shift
+shift
+
+case "$ACTION" in
+    -lock)
+        # Só bloqueia se o Xorg NÃO estiver ativo (inatividade longa)
+        # E se i3lock já não estiver ativo
+        if ! is_xorg_active && ! is_i3lock_active; then
+            i3lock $I3LOCK
+        fi
+        ;;
+    -suspend)
+        # Só suspende se o Xorg NÃO estiver ativo
+        # E se i3lock ESTIVER ativo (tela bloqueada)
+        if ! is_xorg_active && is_i3lock_active; then
+            systemctl suspend
+        fi
+        ;;
+    *)
+        echo "Uso: $0 [-lock|-suspend] [-c /caminho/para/imagem.png]"
+        exit 1
+        ;;
+esac

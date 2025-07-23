@@ -65,10 +65,12 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+t exec i3-sensible-terminal
+bindsym $mod+t exec --no-startup-id bash -c 'alacritty --working-directory "$PWD"'
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
+
+bindsym $mod+Shift+q exec "rofi -show power-menu -modi power-menu:rofi-power-menu"
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
@@ -127,7 +129,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+d focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -153,6 +155,9 @@ bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
+
+bindsym $mod+n workspace next
+bindsym $mod+p workspace prev
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -207,12 +212,34 @@ bar {
         # status_command i3status -c /home/yorukage/.config/i3/i3status.conf
 }
 
+set $i3lockbg "0E1E2B"
+
 # i3lock keybinding
-bindsym $mod+x exec i3lock
+bindsym $mod+x exec i3lock -lock -c $i3lockbg
+
+# Configura o xidlehook para lock e suspend
+exec --no-startup-id xidlehook \
+  --not-when-fullscreen \
+  --not-when-audio \
+  --timer 300 "i3lock -c $i3lockbg" "" \
+  --timer 600 "i3lock -c $i3lockbg && systemctl suspend" ""
 
 #Preset
 
 exec_always nitrogen --restore &
 
+exec_always dunst
+bindsym $mod+Shift+n exec dunstctl close-all
+bindsym $mod+Shift+m exec dunstctl history-pop
+
+bindsym $mod+Shift+s exec scrot
+
 # Windows
 for_window [class="Yad"] floating enable
+
+
+# Printscreen da tela inteira para o clipboard (ex: $mod + Print Screen)
+bindsym $mod+Print exec scrot /tmp/screenshot.png -z -e 'xclip -selection clipboard -target image/png -i $f && rm $f'
+
+# Printscreen de uma área selecionada para o clipboard (ex: só Print Screen)
+bindsym Print exec scrot /tmp/screenshot.png -s -z -e 'xclip -selection clipboard -target image/png -i $f && rm $f'
