@@ -70,7 +70,6 @@ bindsym $mod+t exec --no-startup-id bash -c 'alacritty --working-directory "$PWD
 # kill focused window
 bindsym $mod+q kill
 
-bindsym $mod+Shift+q exec "rofi -show power-menu -modi power-menu:rofi-power-menu"
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
@@ -176,7 +175,8 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "rofi -show power-menu -modi power-menu:rofi-power-menu"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
