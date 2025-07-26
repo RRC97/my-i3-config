@@ -73,7 +73,7 @@ bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+Return exec rofi -show run
+bindsym $mod+Return exec rofi -show drun
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -155,8 +155,9 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
-bindsym $mod+n workspace next
-bindsym $mod+p workspace prev
+# swtich to next/previous workspace
+bindsym $mod+p workspace next
+bindsym $mod+n workspace prev
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -215,14 +216,15 @@ bar {
 set $i3lockbg "0E1E2B"
 
 # i3lock keybinding
-bindsym $mod+x exec i3lock -lock -c $i3lockbg
+# bindsym $mod+x exec i3lock -c $i3lockbg
+# bindsym $mod+Shift+x exec i3lock -c $i3lockbg && systemctl suspend
 
 # Configura o xidlehook para lock e suspend
 exec --no-startup-id xidlehook \
   --not-when-fullscreen \
   --not-when-audio \
-  --timer 300 "i3lock -c $i3lockbg" "" \
-  --timer 600 "i3lock -c $i3lockbg && systemctl suspend" ""
+  --timer 600 "i3lock -c $i3lockbg && systemctl suspend" "" \
+  --timer 300 "i3lock -c $i3lockbg" ""
 
 #Preset
 
