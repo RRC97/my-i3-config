@@ -65,7 +65,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+t exec --no-startup-id bash -c 'alacritty --working-directory "$PWD"'
+bindsym $mod+t exec --no-startup-id bash -c 'alacritty -e tmux'
 
 # kill focused window
 bindsym $mod+q kill
@@ -215,10 +215,6 @@ bar {
 
 set $i3lockbg "0E1E2B"
 
-# i3lock keybinding
-# bindsym $mod+x exec i3lock -c $i3lockbg
-# bindsym $mod+Shift+x exec i3lock -c $i3lockbg && systemctl suspend
-
 # Configura o xidlehook para lock e suspend
 exec --no-startup-id xidlehook \
   --not-when-fullscreen \
@@ -236,7 +232,6 @@ bindsym $mod+Shift+m exec dunstctl history-pop
 
 # Windows
 for_window [class="Yad"] floating enable
-
 
 # Printscreen da tela inteira para o clipboard (ex: $mod + Print Screen)
 bindsym $mod+Print exec scrot /tmp/screenshot.png -z -e 'xclip -selection clipboard -target image/png -i $f && rm $f'
