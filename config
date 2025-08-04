@@ -177,7 +177,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+e exec "rofi -show power-menu -modi power-menu:rofi-power-menu"
+bindsym $mod+Shift+q exec "rofi -show power-menu -modi power-menu:rofi-power-menu"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -232,6 +232,12 @@ bindsym $mod+Shift+m exec dunstctl history-pop
 
 # Windows
 for_window [class="Yad"] floating enable
+for_window [window_role="pop-up"]                       floating enable
+for_window [window_role="bubble"]                       floating enable
+for_window [window_role="task_dialog"]                  floating enable
+for_window [window_role="Preferences"]                  floating enable
+for_window [window_type="dialog"]                       floating enable
+for_window [window_type="menu"]                         floating enable
 
 # Printscreen da tela inteira para o clipboard (ex: $mod + Print Screen)
 bindsym $mod+Print exec scrot /tmp/screenshot.png -z -e 'xclip -selection clipboard -target image/png -i $f && rm $f'
