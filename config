@@ -248,7 +248,7 @@ exec_always nitrogen --restore &
 
 exec_always dunst
 
-bindsym $mod+m exec $HOME/.config/i3/scripts/toggle-mouse 
+bindsym $mod+m exec $SCRIPT_DIR/toggle-mouse 
 
 # Windows
 for_window [class="Yad"] floating enable
