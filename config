@@ -229,7 +229,7 @@ bindsym $mod+Shift+n mode "notify"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-  status_command i3blocks -c /home/yorukage/.config/i3/i3blocks.conf
+  status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
         # status_command i3status -c /home/yorukage/.config/i3/i3status.conf
 }
 
@@ -248,7 +248,7 @@ exec_always nitrogen --restore &
 
 exec_always dunst
 
-bindsym $mod+m exec toggle-mouse 
+bindsym $mod+m exec $HOME/.config/i3/scripts/toggle-mouse 
 
 # Windows
 for_window [class="Yad"] floating enable
