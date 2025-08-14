@@ -248,6 +248,9 @@ exec_always nitrogen --restore &
 
 exec_always dunst
 
+exec_always ibus-daemon -drx
+
+
 bindsym $mod+m exec $SCRIPT_DIR/toggle-mouse 
 
 # Windows
