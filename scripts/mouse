@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+STATE=$(toggle-mouse --status)
+LABEL="${LABEL:"Mouse"}"
+
+if [ "$STATE" == "ON" ]; then
+    echo "$LABEL ON"
+    echo "$LABEL ON"
+else
+    echo "$LABEL OFF"
+    echo "$LABEL OFF"
+    echo "#808080"
+fi

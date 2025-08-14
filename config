@@ -65,7 +65,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+t exec --no-startup-id bash -c 'alacritty -e tmux'
+bindsym $mod+Return exec --no-startup-id bash -c 'alacritty -e tmux'
 
 # kill focused window
 bindsym $mod+q kill
@@ -73,7 +73,7 @@ bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+Return exec rofi -show drun
+bindsym $mod+o exec rofi -show drun
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -192,6 +192,12 @@ mode "resize" {
         bindsym $mod+k resize shrink height 10 px or 10 ppt
         bindsym $mod+l resize grow width 10 px or 10 ppt
 
+        # move focused window
+        bindsym $mod+Shift+h move left
+        bindsym $mod+Shift+j move down
+        bindsym $mod+Shift+k move up
+        bindsym $mod+Shift+l move right
+
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
@@ -205,6 +211,20 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+mode "notify" {
+  bindsym $mod+j exec dunstctl history-pop
+  bindsym $mod+k exec dunstctl close
+
+  bindsym $mod+Shift+c exec dunstctl history-clear
+  bindsym $mod+c exec dunstctl close-all
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym $mod+Shift+n mode "default"
+}
+
+bindsym $mod+Shift+n mode "notify"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -227,8 +247,8 @@ exec --no-startup-id xidlehook \
 exec_always nitrogen --restore &
 
 exec_always dunst
-bindsym $mod+Shift+n exec dunstctl close-all
-bindsym $mod+Shift+m exec dunstctl history-pop
+
+bindsym $mod+m exec toggle-mouse 
 
 # Windows
 for_window [class="Yad"] floating enable
@@ -243,4 +263,4 @@ for_window [window_type="menu"]                         floating enable
 bindsym $mod+Print exec scrot /tmp/screenshot.png -z -e 'xclip -selection clipboard -target image/png -i $f && rm $f'
 
 # Printscreen de uma área selecionada para o clipboard (ex: só Print Screen)
-bindsym Print exec scrot /tmp/screenshot.png -s -z -e 'xclip -selection clipboard -target image/png -i $f && rm $f'
+bindsym Print exec scrot /tmp/sreenshot.png -s -z -e 'xclip -selection clipboard -target image/png -i $f && rm $f'
