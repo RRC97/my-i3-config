@@ -36,6 +36,14 @@ def create_argparse():
         help='color of the output, when updates are available(default=yellow)'
     )
     parser.add_argument(
+        '-c',
+        '--checkupdates',
+        action = 'store_const',
+        const = True,
+        default = _default('CHECKUPDATES', 'False', strbool),
+        help='Include AUR packages. Attn: Yaourt must be installed'
+    )
+    parser.add_argument(
         '-a',
         '--aur',
         action = 'store_const',
@@ -138,10 +146,15 @@ label = os.environ.get("LABEL","")
 message = "<span color='{1}'>{0} {2}</span>"
 args = create_argparse()
 
-updates = get_updates()
+updates = []
+
+if args.checkupdates:
+    updates += get_updates()
+
 if args.aur:
     updates += get_aur_yaourt_updates()
-elif args.aur_yay:
+
+if args.aur_yay:
     updates += get_aur_yay_updates()
 
 update_count = len(updates)
