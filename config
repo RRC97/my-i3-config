@@ -251,7 +251,7 @@ exec_always dunst
 
 exec_always ibus-daemon -drx
 
-exec_always bash -c "dbus-monitor interface='org.freedesktop.Notifications' | grep --line-buffered \"member=Notify\" | while read -r line; do canberra-gtk-play -i message; done"
+exec_always bash -c "dbus-monitor interface='org.freedesktop.Notifications' | grep --line-buffered \"member=Notify\" | while read -r line; do canberra-gtk-play -i bell; done"
 
 bindsym $mod+m exec $SCRIPT_DIR/toggle-mouse 
 
