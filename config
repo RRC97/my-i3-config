@@ -213,6 +213,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 mode "notify" {
+
   bindsym $mod+j exec dunstctl history-pop
   bindsym $mod+k exec dunstctl close
 
@@ -250,6 +251,7 @@ exec_always dunst
 
 exec_always ibus-daemon -drx
 
+exec_always bash -c "dbus-monitor interface='org.freedesktop.Notifications' | grep --line-buffered \"member=Notify\" | while read -r line; do canberra-gtk-play -i message; done"
 
 bindsym $mod+m exec $SCRIPT_DIR/toggle-mouse 
 
