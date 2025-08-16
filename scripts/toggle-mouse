@@ -20,7 +20,8 @@ if [ "$STATE" -eq 1 ]; then
     xdotool mousemove $((SCREEN_WIDTH + 200)) $((SCREEN_HEIGHT + 200))
 
     xinput disable "$ID"
-    notify-send "Mouse Disabled" "The mouse with ID $ID has been disabled."
+    canberra-gtk-play -i message
+    # notify-send "Mouse Disabled" "The mouse with ID $ID has been disabled."
 else
 
     if [ -f "$POS_FILE" ]; then
@@ -30,5 +31,6 @@ else
     fi
 
     xinput enable "$ID"
-    notify-send "Mouse Enabled" "The mouse with ID $ID has been enabled."
+    canberra-gtk-play -i message
+    # notify-send "Mouse Enabled" "The mouse with ID $ID has been enabled."
 fi
