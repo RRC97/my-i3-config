@@ -5,10 +5,7 @@ STATE=${TOGGLE_MOUSE_STATUS:-"ON"}
 LABEL="${LABEL:-"Mouse "}"
 
 if [ "$STATE" == "ON" ]; then
-    echo "$LABEL ON"
-    echo "$LABEL ON"
+    echo "%{F-}$LABEL ON"
 else
-    echo "$LABEL OFF"
-    echo "$LABEL OFF"
-    echo "#808080"
+    echo "%{F#808080}$LABEL OFF"
 fi
