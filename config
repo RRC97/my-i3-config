@@ -252,9 +252,9 @@ smart_gaps on
 exec --no-startup-id xidlehook \
   --not-when-fullscreen \
   --not-when-audio \
-  --timer 600 "i3lock-fancy && systemctl suspend" ""
+  --timer 600 "systemctl suspend"
 
-bindsym $mod+x exec i3lock-fancy
+bindsym $mod+x exec loginctl lock-session
 
 #Preset
 
@@ -289,7 +289,7 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
 
 # Printscreen da tela inteira para o clipboard (ex: $mod + Print Screen)
-bindsym $mod+Print exec maim /tmp/screenshot.png | xclip -selection clipboard -i -t image/png
+bindsym $mod+Print exec maim | xclip -selection clipboard -i -t image/png
 
 # Printscreen de uma área selecionada para o clipboard (ex: só Print Screen)
 bindsym Print exec maim -s | xclip -selection clipboard -i -t image/png
