@@ -157,8 +157,8 @@ bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
 # swtich to next/previous workspace
-bindsym $mod+p workspace next
-bindsym $mod+n workspace prev
+bindsym $mod+p workspace prev
+bindsym $mod+n workspace next
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1

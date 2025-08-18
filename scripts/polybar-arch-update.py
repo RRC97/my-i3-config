@@ -143,7 +143,7 @@ def matching_updates(updates, watch_list):
 
 
 label = os.environ.get("LABEL","")
-message = "%{{F#{1}}} {0} {2}"
+message = "{0} %{{F#{1}}}{2}"
 args = create_argparse()
 
 updates = []
