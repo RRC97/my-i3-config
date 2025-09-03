@@ -15,9 +15,12 @@ fi
 if [ "$STATE" -eq 1 ]; then
     xdotool getmouselocation --shell | grep -E 'X=|Y=' | cut -d= -f2 | tr '\n' ' ' > "$POS_FILE"
 
-    SCREEN_WIDTH=$(xdotool getdisplaygeometry | awk '{print $1}')
-    SCREEN_HEIGHT=$(xdotool getdisplaygeometry | awk '{print $2}')
-    xdotool mousemove $((SCREEN_WIDTH + 200)) $((SCREEN_HEIGHT + 200))
+    read SCREEN_WIDTH SCREEN_HEIGHT <<< $(xdotool getdisplaygeometry)
+    xdotool mousemove $((2 * SCREEN_WIDTH - 1)) $((SCREEN_HEIGHT - 1))
+    # SCREEN_WIDTH=$(xdotool getdisplaygeometry | awk '{print $1}')
+    # SCREEN_HEIGHT=$(xdotool getdisplaygeometry | awk '{print $2}')
+    # xdotool mousemove $((SCREEN_WIDTH + 200)) $((SCREEN_HEIGHT + 200))
+    # xdotool mousemove -- -100 -100
 
     xinput disable "$ID"
     canberra-gtk-play -i message
