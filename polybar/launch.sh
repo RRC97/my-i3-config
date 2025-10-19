@@ -1,13 +1,19 @@
 #!/usr/bin/env bash
 
-# Terminate already running bar instances
-# If all your bars have ipc enabled, you can use 
-polybar-msg cmd quit
-# Otherwise you can use the nuclear option:
-# killall -q polybar
+# Kill running bars
+killall -q polybar
 
-# Launch bar1 and bar2
-echo "---" | tee -a /tmp/polybar1.log /tmp/polybar2.log
-polybar mybar -c $HOME/.config/i3/polybar/config.ini 2>&1 | tee -a /tmp/polybar1.log & disown
+# Wait until the processes have been shut down
+while pgrep -x polybar >/dev/null; do sleep 1; done
 
-echo "Bars launched..."
+# Launch one bar per monitor
+
+for m in $(polybar --list-monitors | cut -d":" -f1); do
+    if [[ $m == "HDMI-A-0" ]]; then
+        MONITOR=$m polybar --reload secondary -c $HOME/.config/i3/polybar/config.ini 2>&1 | tee -a /tmp/polybar2.log & disown 
+    else
+        MONITOR=$m polybar --reload main -c $HOME/.config/i3/polybar/config.ini 2>&1 | tee -a /tmp/polybar1.log & disown 
+    fi
+done
+
+
