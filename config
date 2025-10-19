@@ -271,7 +271,7 @@ bindsym $mod+Shift+x exec systemctl suspend
 exec_always dunst
 exec_always --no-startup-id feh --bg-fill $HOME/Pictures/Wallpapers/default.jpg
 
-exec_always ibus-daemon -drx
+# exec_always ibus-daemon -drx
 
 exec --no-startup-id dbus-monitor interface='org.freedesktop.Notifications' | grep --line-buffered "member=Notify" | while read -r line; do canberra-gtk-play -i bell; done
 exec_always picom --config $HOME/.config/picom/picom.conf
