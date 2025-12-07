@@ -172,8 +172,8 @@ bindsym $mod+0 workspace number $ws10
 bindsym $mod+p workspace prev_on_output
 bindsym $mod+n workspace next_on_output
 
-bindsym $mod+Shift+p move workspace to output prev
-bindsym $mod+Shift+n move workspace to output next
+bindsym $mod+Shift+p move workspace to output left
+bindsym $mod+Shift+n move workspace to output right
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1

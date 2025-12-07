@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-ID=13
+ID=8
 STATE=$(xinput list-props "$ID" | grep "Device Enabled" | awk '{print $4}')
 POS_FILE="/tmp/mouse-toggle-last-pos"
 
