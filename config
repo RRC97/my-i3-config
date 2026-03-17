@@ -66,7 +66,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id bash -c 'alacritty -e tmux'
+bindsym $mod+Return exec --no-startup-id bash -c 'kitty -e tmux'
 
 # kill focused window
 bindsym $mod+q kill
@@ -273,7 +273,7 @@ exec_always --no-startup-id feh --bg-fill $HOME/Pictures/Wallpapers/default.jpg
 
 # exec_always ibus-daemon -drx
 
-exec --no-startup-id dbus-monitor interface='org.freedesktop.Notifications' | grep --line-buffered "member=Notify" | while read -r line; do canberra-gtk-play -i bell; done
+# exec --no-startup-id dbus-monitor type='method_call' interface='org.freedesktop.Notifications' | grep --line-buffered "member=Notify" | while read -r line; do canberra-gtk-play -i bell; done
 exec_always picom --config $HOME/.config/picom/picom.conf
 exec_always autotiling
 
